@@ -1,0 +1,11 @@
+'.source.php, source.html':
+    'click2call':
+        'prefix': 'lclick2call'
+        'body': """
+            <!-- Click2Call -->
+            <a title="Ligamos para você"  href="javascript:void(0);" onclick="openC2C()">
+            	<p>
+                    SE PREFERIR, NÓS LIGAMOS PARA VOCÊ. BASTA CLICAR AQUI.
+                </p>
+            </a>
+        """
