@@ -1,0 +1,17 @@
+'.source.php, source.html':
+    'click2call antigo':
+        'prefix': 'lclick2callantigo'
+        'body': """
+            <!-- click2Call sistema antigo (codigo) -->
+            <div class="click2call">
+            	<script>
+            		function openC2C() {
+            			window.open('http://crm.reweb.com.br/click2call?token=<?php echo $_SESSION[acesso_token]; ?>','C2C','top=150, left=500, width=340,height=420');
+            		}
+            	</script>
+
+            	<a title="Ligamos para você" href="javascript:void(0);" onclick="openC2C();" onclick="http://crm.reweb.com.br/click2call?token=$token">
+            		<img src="img/click.png"/>
+            	</a>
+            </div>
+        """

@@ -1,0 +1,24 @@
+'.source.php, source.html, source.js':
+    'texto descricao':
+        'prefix': 'ltextodescricao'
+        'body': """
+            <!-- Click efeito abre e fecha texto descricao. -->
+            <script>
+            	$(document).ready(function() {
+            		$('.icones-lojas').live('click',function(){
+            			var id = $(this).attr('data-id');
+            			$('#div-loja-'+id).slideToggle();
+            		});
+            		$('.container-lojas').hide();
+
+            		//Efeito aparece algo quando coloca mousse em cima
+            		$('.icones-lojas').live('mouseenter', function(){
+            			var id = $(this).attr('data-id');
+            			$('#div-hover-' +id).fadeIn();
+            		}).live('mouseleave',function(){
+            			var id = $(this).attr('data-id');
+            			$('#div-hover-' +id).fadeOut();
+            		});
+            	});
+            </script>
+        """

@@ -1,0 +1,28 @@
+'.source.php, source.html':
+    'fonts':
+        'prefix': 'lfonts'
+        'body': """
+            <!-- Como colocar fonts fora do google fonts no sistema -->
+
+            <!-- Primeiro, você grava a pasta fonts do servidor design, que está no caminho, G:\_Banco de Imagens\Fontes.
+
+            Apos, vá no sistema em subir imagens adicionais e sobe o arquivo da fonte escolhida.
+
+            Pega a URL, e cola no lugar das duas SRC (otf), renomeando para o nome que deseja chamar depois no font-family.
+
+            OBS: se precisar de duas fonts, deve ser chamado duas vezes, como o exemplo abaixo: -->
+
+            <style type="text/css">
+            @font-face{
+            	font-family: 'Nexa';
+            	src: url('upload/f066bca0.otf');
+            	src: url('upload/f066bca0.otf') format('opentype');
+            }
+
+            @font-face{
+            	font-family: 'Nexa bold';
+            	src: url('upload/f066b9d5.otf');
+            	src: url('upload/hof066b9d5.otf') format('opentype');
+            }
+            </style>
+        """

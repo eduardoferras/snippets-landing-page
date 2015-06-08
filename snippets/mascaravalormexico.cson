@@ -1,0 +1,29 @@
+'.source.php, source.html, source.js':
+    'mascara valor mexico':
+        'prefix': 'lmaskmexico'
+        'body': """
+            <!-- MASCARA VALOR MÉXICO -->
+            <script>
+             $('document').ready(function(){
+            	    var obj = ($('#enganche2') === undefined ? $j('#enganche2') : $('#enganche2'))
+
+            		obj.focus(function(event) {
+                            obj.priceFormat({
+                                        prefix: '$ ',
+                                        centsSeparator: ',',
+                                        thousandsSeparator: '.'
+                            });
+
+                    });
+
+            		obj.blur(function(event) {
+
+            			if (obj.val() == "$ 0,00") {
+            				obj.val("Enganche");
+            		    }
+            		});
+
+            	});
+
+            </script>
+        """

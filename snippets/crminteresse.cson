@@ -1,0 +1,13 @@
+'.source.php':
+    'crm interesse':
+        'prefix': 'lcrminteresse'
+        'body': """
+            <?php
+            $interesses = $admanager->getInteressesCliente(DOMINIO);
+            foreach ($interesses as $u){
+            	if ($u['id'] == $interesse_id) {
+                   $interesse = $u['nome'];
+                }
+            }
+            ?>
+        """

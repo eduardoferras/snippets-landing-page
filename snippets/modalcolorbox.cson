@@ -1,0 +1,15 @@
+'.source.php, source.js, source.html':
+    'modal colorbox':
+        'prefix': 'lmodalcolorbox'
+        'body': """
+            <!-- MODAL colorbox -->
+            <script type="text/javascript">
+            $(document).ready(function(){
+            	$.colorbox({
+            	html:"<img src='http://www.antonioaugustoimoveis.net/assets/frontend/img/modal.jpg' >",
+            	width:'550px',
+            	height:'620px'
+            	});
+            });
+            </script>
+        """

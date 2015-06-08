@@ -1,0 +1,11 @@
+'.source.php, source.js, source.html':
+    'bx slider':
+        'prefix': 'lslider'
+        'body': """
+            <!-- BX SLIDER -->
+             $('.bxslider').bxSlider({
+                pause: 10000, //tempo que passagem das imagens, pause
+                speed: 500,   // velocidade de passagem das imagens
+            	mode: 'fade' // efeito de passagem das imagens
+              });
+        """

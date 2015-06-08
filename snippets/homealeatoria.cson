@@ -1,0 +1,11 @@
+'.source.php, source.html, source.js':
+    'home aleatoria':
+        'prefix': 'lhomealeatoria'
+        'body': """
+            <!-- Pagina HOME Aleatória -->
+            <script>
+            $(document).ready(function() {
+                window.location.href = $('.produto a')[Math.floor(Math.random() * $('.produto').length)];
+            });
+            </script>
+        """

@@ -1,0 +1,22 @@
+'.source.php, source.html, source.js':
+    'voltar topo':
+        'prefix': 'lvoltatopo'
+        'body': """
+            <!-- btn volta topo -->
+            <script>
+            $('.btn-topo').click(function(){
+            	$("html, body").animate({scrollTop:0}, '500', 'swing');
+            });
+
+            $('html,body').animate({
+               scrollTop: $(".rodape").offset().top},'slow');
+            });
+
+            //quando nao quer ir para o topo. muda no scrollTop:0
+            <!-- BTN click para rodape -->
+            <script type="text/javascript">
+            $('.outros-modelos').click(function(){
+            	$("html, body").animate({scrollTop:$(".produtos").offset().top}, '500', 'swing');
+            });
+            </script>
+        """

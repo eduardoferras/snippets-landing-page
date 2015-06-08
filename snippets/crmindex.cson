@@ -1,0 +1,10 @@
+'.source.php':
+    'crm index':
+        'prefix': 'lcrmindex'
+        'body': """
+            <?php
+            	require_once ('AdManagerAPI.class.php');
+            	$admanager = new AdManagerAPI();
+            	$admanager->registraAcesso();
+            ?>
+        """

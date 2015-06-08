@@ -1,0 +1,134 @@
+'.source.php, source.js, source.html':
+    'carrossel template':
+        'prefix': 'lca'
+        'body': """
+            <style>
+            .btn {
+                color: #004492;
+                cursor: pointer;
+                font-size: 50px;
+                font-weight: bold;
+                position: absolute;
+                top: -18px;
+            }
+
+            .next {
+                left: 255px;
+            }
+
+            .prev {
+                left: -30px;
+            }
+
+            .carrossel {
+                color: #333333;
+                float: right;
+                font-family: arial;
+                font-size: 15px;
+                margin: 20px 0 0;
+                position: relative;
+                text-align: center;
+                width: 270px;
+            }
+
+            .carrossel-item {
+                line-height: 10px;
+                position: absolute;
+            }
+
+            .loja {
+                color: #444444;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .carrossel-item p span {
+                color: #004492;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            </style>
+
+            <div class="carrossel">
+                <div class="carrossel-item item-1">
+                    <p>Entre em contato pelo formulário ao lado </p>
+                    <p class="loja">Barão do Rio Branco</p>
+                    <p>ou ligue: <span> (85) 4062-9546 </span></p>
+                </div>
+                <div class="carrossel-item item-2">
+                    <p>Entre em contato pelo formulário ao lado</p>
+                    <p class="loja">Pontes Vieira</p>
+                    <p>ou ligue: <span> (85) 4062-9547 </span></p>
+                </div>
+
+                <div class="btn next">
+                    <p>&gt;</p>
+                </div>
+
+                <div class="btn prev">
+                    <p>&lt;</p>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+
+                $('.carrossel-item').hide();
+
+                var current = 1;
+                var total = 2;
+
+                $('.item-' + current).show();
+
+                $('.next').click(function(){
+
+                    next();
+
+                });
+
+                $('.prev').click(function(){
+
+                    prev();
+
+                });
+
+            function next()
+            {
+                clearInterval(timer);
+                $('.item-' + current).hide(400);
+
+                    if(current < 2)
+                    {
+                        current++;
+                    }
+                    else
+                    {
+                        current = 1;
+                    }
+
+                    $('.item-' + current).show(600);
+            timer = setInterval( next, 6000);
+            }
+
+            function prev()
+            {
+                clearInterval(timer);
+                $('.item-' + current).hide(400);
+
+                    if(current > 1)
+                    {
+                        current--;
+                    }
+                    else
+                    {
+                        current = 2;
+                    }
+
+                    $('.item-' + current).show(600);
+            timer = setInterval( next, 6000);
+            }
+
+            var timer = setInterval( next, 6000);
+
+            </script>
+        """

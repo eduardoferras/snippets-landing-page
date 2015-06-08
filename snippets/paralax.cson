@@ -1,0 +1,41 @@
+'.source.php, source.html, source.js':
+    'paralax':
+        'prefix': 'lparalax'
+        'body': """
+            <!-- PARALAX -->
+            <script>
+            	$('[data-parallax="true"]').each(function(){
+
+             		var _this = $(this);
+             		var _window = $(window);
+             		var bg_postition = _this.css("backgroundPosition").split(' ');
+             		var bg_postition_left = bg_postition[0];
+             		var bg_postition_top = bg_postition[1];
+
+            		$(window).scroll(function() {
+
+            			var yPos = -(_window.scrollTop() / _this.data('speed'));
+            			var coords = bg_postition_left + ' ' + yPos + 'px';
+
+            			_this.css({ backgroundPosition: coords });
+            		});
+
+            </script>
+            <html>
+            	<div class="bloco-3" data-parallax="true" data-speed="15">
+                    <div class="content">
+                    </div>
+                </div>
+            </html>
+            <style>
+            	.bloco-3 {
+                    background: url("../img/fundo3.jpg") no-repeat fixed 50% -150px rgba(0, 0, 0, 0);
+                    height: 760px;
+                    padding-top: 70px;
+                    position: absolute;
+                    top: 1880px;
+                    width: 100%;
+                    z-index: 3;
+            }
+            </style>
+        """

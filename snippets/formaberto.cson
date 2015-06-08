@@ -1,0 +1,10 @@
+'.source.php, source.html, source.js':
+    'form aberto':
+        'prefix': 'lformaberto'
+        'body': """
+            <!-- DEIXAR O FORM ABERTO PRIMEIRO QUANDO INICIA A PAGINA -->
+            <script>
+            	$(".div_form").hide();
+            	$("#div_form_1").fadeIn();
+            </script>
+        """

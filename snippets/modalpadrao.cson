@@ -1,0 +1,30 @@
+'.source.php, source.js, source.html':
+    'modal padrao':
+        'prefix': 'lmodal'
+        'body': """
+            <!-- MODAL -->
+
+            <div id="myModal" class="reveal-modal">
+                 <img src="upload/95de5348.jpg">
+            </div>
+
+            <script type="text/javascript">
+            	$(document).ready(function() {
+            		$("html").click(function() {
+            			$("#myModal").css("visibility", "hidden");
+            		});
+            	});
+            </script>
+
+            <style type="text/css">
+
+            #myModal {
+            	visibility: visible;
+            	top: 50px;
+            	left: 50%;
+            	margin-left: -420px;
+            	width: 755px;
+            }
+
+            </style>
+        """

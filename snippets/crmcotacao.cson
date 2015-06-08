@@ -1,0 +1,11 @@
+'.source.php':
+    'crm cotacao':
+        'prefix': 'lcrmcotacao'
+        'body': """
+            <?php
+            	$meio_captacao = 'FORM_COTACAO';
+            	require_once("AdManagerAPI.class.php");
+            	$admanager = new AdManagerAPI ();
+            	$admanager->registraLead($meio_captacao,$nome,$email,$fone,$cidade,$estado,'Brasil',$mens);
+            ?>
+        """

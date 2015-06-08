@@ -1,0 +1,11 @@
+'.source.php, source.html':
+    'sms':
+        'prefix': 'lsms'
+        'body': """
+            <!-- SMS -->
+            <div class="sms">
+            	<a onclick="$('#modal_infobysms').reveal();$('#infobysms_product_id').val(8035)" href="javascript:void(0)">
+            		<img alt="" src="upload/47c5fa7b.png">
+            	</a>
+            </div>
+        """

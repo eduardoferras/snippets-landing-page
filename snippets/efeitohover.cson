@@ -1,0 +1,17 @@
+'.source.php, source.html, source.js':
+    'efeito hover':
+        'prefix': 'lhover'
+        'body': """
+            <!-- efeito houver com o mouse em cima do produto -->
+            <script>
+            $(document).ready(function(){
+
+            	$('.produto').hover(function(){
+            		$(this).stop().fadeTo( 300 , 0.6)
+            	}, function(){
+            		$(this).stop().fadeTo( 300 , 1)
+            	});
+
+            });
+            </script>
+        """

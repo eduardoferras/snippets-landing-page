@@ -1,0 +1,13 @@
+'.source.php, source.js, source.html':
+    'fancybox':
+        'prefix': 'lfancybox'
+        'body': """
+            <!-- FANCYBOX -->
+            <a href="upload/greensquare_gran_l1_c1.jpg" class="fancybox" rel="group"><li class="slid_img" ><img src="upload/greensquare_mini_l1_c1.png" /></li></a>
+            <script type="text/javascript">
+            	$j = jQuery.noConflict();
+            	$j(document).ready(function() {
+            		$(".fancybox").fancybox();
+            	});
+            </script>
+        """

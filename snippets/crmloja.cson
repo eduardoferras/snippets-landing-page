@@ -1,0 +1,13 @@
+'.source.php':
+    'crm loja':
+        'prefix': 'lcrmloja'
+        'body': """
+            <?php
+            	require_once ('AdManagerAPI.class.php');
+            	$admanager = new AdManagerAPI();
+            	$unidades = $admanager->getUnidadesCliente(DOMINIO);
+            	foreach ($unidades as $u){
+        	       echo '<option value="'.$u['id'].'">'.$u['nome'].'</option>';
+                }
+            ?>
+        """

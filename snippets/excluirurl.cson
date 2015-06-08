@@ -1,0 +1,9 @@
+'.source.php, source.html, source.js':
+    'excluir url':
+        'prefix': 'lexcluirurl'
+        'body': """
+            <!-- excluir URL -->
+            <script>
+            	$(".produto a").attr("href","javascript:void(0)");
+            </script>
+        """
