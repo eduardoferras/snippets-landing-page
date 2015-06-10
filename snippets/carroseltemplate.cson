@@ -1,4 +1,4 @@
-'.source.php, source.js, source.html':
+'*':
     'carrossel template':
         'prefix': 'lca'
         'body': """

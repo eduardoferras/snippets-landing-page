@@ -1,4 +1,4 @@
-'.source.php, source.html, source.js':
+'*':
     'home aleatoria':
         'prefix': 'lhomealeatoria'
         'body': """

@@ -1,4 +1,4 @@
-'.source.php, source.js, source.html':
+'*':
     'modal padrao':
         'prefix': 'lmodal'
         'body': """

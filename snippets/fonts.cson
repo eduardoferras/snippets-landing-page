@@ -1,4 +1,4 @@
-'.source.php, source.html':
+'*':
     'fonts':
         'prefix': 'lfonts'
         'body': """

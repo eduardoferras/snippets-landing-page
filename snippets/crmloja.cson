@@ -1,4 +1,4 @@
-'.source.php':
+'*':
     'crm loja':
         'prefix': 'lcrmloja'
         'body': """

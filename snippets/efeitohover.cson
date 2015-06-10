@@ -1,4 +1,4 @@
-'.source.php, source.html, source.js':
+'*':
     'efeito hover':
         'prefix': 'lhover'
         'body': """

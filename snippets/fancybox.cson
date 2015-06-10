@@ -1,4 +1,4 @@
-'.source.php, source.js, source.html':
+'*':
     'fancybox':
         'prefix': 'lfancybox'
         'body': """

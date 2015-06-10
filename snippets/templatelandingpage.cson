@@ -1,4 +1,4 @@
-'.source.php, source.html':
+'*':
     'template landing page':
         'prefix': 'ltp'
         'body': """

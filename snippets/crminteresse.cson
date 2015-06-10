@@ -1,4 +1,4 @@
-'.source.php':
+'*':
     'crm interesse':
         'prefix': 'lcrminteresse'
         'body': """

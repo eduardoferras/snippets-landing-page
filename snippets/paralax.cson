@@ -1,4 +1,4 @@
-'.source.php, source.html, source.js':
+'*':
     'paralax':
         'prefix': 'lparalax'
         'body': """

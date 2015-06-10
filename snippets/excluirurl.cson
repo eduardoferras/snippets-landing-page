@@ -1,4 +1,4 @@
-'.source.php, source.html, source.js':
+'*':
     'excluir url':
         'prefix': 'lexcluirurl'
         'body': """

@@ -1,4 +1,4 @@
-'.source.php, source.html':
+'*':
     'sms':
         'prefix': 'lsms'
         'body': """

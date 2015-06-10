@@ -1,4 +1,4 @@
-'.source.php':
+'*':
     'crm cotacao':
         'prefix': 'lcrmcotacao'
         'body': """

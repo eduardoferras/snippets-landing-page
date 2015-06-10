@@ -1,4 +1,4 @@
-'.source.php':
+'*':
     'crm index':
         'prefix': 'lcrmindex'
         'body': """

@@ -3,7 +3,7 @@
   "main": "./lib/snippets-landing-page",
   "version": "0.3.0",
   "description": "Landing Page Snippets Atom",
-  "repository": "https://github.com/edFerras/snippets-landing-page",
+  "repository": "https://github.com/edferras/snippets-landing-page",
   "license": "MIT",
   "engines": {
     "atom": ">=0.174.0"

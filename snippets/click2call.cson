@@ -1,4 +1,4 @@
-'.source.php, source.html':
+'*':
     'click2call':
         'prefix': 'lclick2call'
         'body': """

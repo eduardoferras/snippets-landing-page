@@ -1,4 +1,4 @@
-'.source.php, source.js, source.html':
+'*':
     'bx slider':
         'prefix': 'lslider'
         'body': """

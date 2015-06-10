@@ -1,4 +1,4 @@
-'.source.php, source.html, source.js':
+'*':
     'voltar topo':
         'prefix': 'lvoltatopo'
         'body': """

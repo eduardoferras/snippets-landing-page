@@ -1,7 +1,20 @@
 # snippets-landing-page
 Criação de Snippets para facilidade na implementação de novas funcionalidades.
 
-#Documentação
+## Instalação
+Abra seu [Atom](http://atom.io), `Preferências > Packages` e procure por **Snippets Landing Page**.
+
+## Desenvolvimento
+
+```sh
+$ cd ~/.atom/packages
+$ git clone https://github.com/edferras/snippets-landing-page.git
+$ cd snippets-landing-page
+$ apm install
+$ apm link
+```
+
+## Documentação
 Documentação snippets landing pages
 
 |      Snippets     	| Descrição                           	|
@@ -10,8 +23,8 @@ Documentação snippets landing pages
 | lclick2callantigo 	| Click2Call Antigo                   	|
 |   lhomealeatoria  	| Home Aleatória                      	|
 |    lformaberto    	| Form aberto ao iniciar a página     	|
-|       lhover      	|                                     	|
-|  ltextodescricao  	| Efeito abre e fecha texto descrição 	|
+|       lhover      	| Efeito abre e fecha                     	|
+|  ltextodescricao  	| texto descrição
 |        lsms       	| SMS                                 	|
 |    lexcluirurl    	| Excluir URL                         	|
 |     lvoltatopo    	| Voltar ao topo                      	|
