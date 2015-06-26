@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/edferras/snippets-landing-page.svg)](https://travis-ci.org/edferras/snippets-landing-page)
+
 # snippets-landing-page
 Criação de Snippets para facilidade na implementação de novas funcionalidades.
 
