@@ -44,4 +44,11 @@ Documentação snippets landing pages
 |      lca     	      | Template para carrossel               |
 |      ltp     	      | Template landing page                 |
 
+## Contribuir
+1. Fork o projeto.
+2. Crie sua branch: `git checkout -b minha-nova-branch`
+3. Envie suas modificações: `git commit -m 'Adicionando recurso'`
+4. Adicione suas alteraçoes a branch: `git push oring minha-nova-branch`
+5. Colabore com um pull request.
+
 A todos os snippets optou-se utilizar a letra L ao início do comando para diferenciar o grupo dos demais atalhos.
