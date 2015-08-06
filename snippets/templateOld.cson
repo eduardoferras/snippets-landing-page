@@ -9,8 +9,7 @@
 
             .clear-fix:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
             .clear-fix { display: inline-block; clear: both; }
-            /* start commented backslash hack \*/ * html .clear-fix { height: 1%; } .clear-fix { display: block; } /* close commented backslash hack */
-
+            
             .content
             {
             	position: relative;
