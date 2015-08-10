@@ -1,15 +1,15 @@
 '*':
-    'template landing page':
-        'prefix': 'ltp'
+    'templateOld':
+        'prefix': 'tmp_old'
         'body': """
-            <!--TEMPLATE LP -->
+            <!--TEMPLATE LP OLD-->
+
             <style>
             a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 
             .clear-fix:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
             .clear-fix { display: inline-block; clear: both; }
-            * html .clear-fix { height: 1%; } .clear-fix { display: block; }
-
+            
             .content
             {
             	position: relative;
@@ -26,6 +26,7 @@
             #box{margin:0 auto; width:990px;}
 
             /* topo */
+
 
             .topo {
 
@@ -125,6 +126,7 @@
                 width: 185px;
             }
 
+
             .formulario form select {
                 border: 1px solid #ccc;
                 border-radius: 6px;
@@ -137,6 +139,7 @@
                 padding: 6px;
                 width: 199px;
             }
+
 
             .formulario form textarea {
                 border: 1px solid #ccc;
@@ -161,6 +164,7 @@
                 width: auto;
             }
 
+
             .formulario form .checkbox {
                 border: medium none;
                 box-shadow: none;
@@ -174,6 +178,14 @@
                 font-family: arial;
                 font-size: 18px;
             	cursor: pointer;
+              /*  font-weight: bold;
+               height: 38px;
+               padding: 17px 0 0;
+               text-align: center;
+               word-spacing: -2px;
+               width: 335px;
+               clear:both;
+               margin: 0px 0px 0px 3px; */
             }
 
             .div_form {
@@ -185,6 +197,7 @@
                 float: left;
                 margin: 2px 0 2px;
                 padding: 0;
+                /* width: 190px; */
             }
 
             .termos {
@@ -318,32 +331,28 @@
             	color: #333;
             }
 
-            </style>
+            </STYLE>
 
             <div class="container">
-            	<!-- ABRE TOPO -->
                 <div class="topo">
                     <div class="content">
             			<div class="logo-topo">
-            				<a href="{dominio_cliente}">
-            					{logo}
-            				</a>
+            				<a href="{dominio_cliente}">{logo}</a>
             			</div>
             			<div class="formulario_container">
             				<div class="formulario">
+
             					{leadfones}
 
             					{forms}
+
             				</div>
             			</div>
                     </div>
-                </div>
-            	<!-- FECHA TOPO -->
-            	<div class="clear-fix"></div>
-            	<!-- ABRE MEIO -->
+                </div> <!-- fecha topo -->
+            	<div class="clear-fix"> </div>
             	<div class="meio">
             		<div class="content">
-            			<!-- ABRE BLOCO ESQUERDO -->
             			<div class="bloco-esq">
             				<div class="chamada-descricao">
             					{chamada}
@@ -357,38 +366,27 @@
             					{produto_foto}
             				</div>
 
-            			</div>
-            			<!-- FECHA BLOCO ESQUERDO -->
-            			<!-- ABRE BLOCO DIREITO -->
+            			</div> <!-- fecha bloco-esq -->
             			<div class="bloco-dir">
             				<div class="logo-bloco-dir">
-            					<a href="{dominio}">
-            						{logo2}
-            					</a>
+            					<a href="{dominio}">{logo2}</a>
             				</div>
             				<div class="endereco">
             					{unidades}
             				</div>
-            			</div>
-            			<!-- FECHA BLOCO DIREITO -->
+            			</div> <!-- fecha bloco-dir -->
             		</div>
-            	</div>
-            	<!-- FECHA MEIO -->
-
-            	<div class="clear-fix"></div>
-            	<!-- ABRE RODAPE -->
+            	</div> <!-- fecha meio -->
+            	<div class="clear-fix"> </div>
             	<div class="rodape">
             		<div class="content">
-            			<div class="outros-modelos">
-            				Conheça outros Modelos
-            			</div>
+            			<div class="outros-modelos">Conheça outros Modelos </div>
             			<div class="produtos">
             				<div class="produtos_capa">
             					{produtos}
             				</div>
             			</div>
             		</div>
-            	</div>
-            	<!-- FECHA RODAPE -->
+            	</div> <!-- fecha rodape -->
             </div>
         """
