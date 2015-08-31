@@ -1,396 +1,7 @@
 '*':
     'template_novo':
-        'prefix': 'tmpNew'
+        'prefix': 'lp_new'
         'body': """
-            <script>
-            /*
-            *    Função @widthContent
-            *    @description = Determina width do "content".
-            *    @width 			= Elemento que contém o texto a ser modificado.
-            *		 @exemple 		= widthContent('70%');
-            */
-            function widthContent(width){
-            		$('.content').css({
-            				'width' : width.toString(),
-            				'margin' : '0 auto'
-            		});
-            }
-
-            /*
-            *    Função @setaBlocos
-            *    @description = Adiciona blocos esquerdo e direito.
-            *    @blocosArray	= Elementos que receberão os blocos "-esq" e "dir".
-            *		 @obs: 				= Separar blocos por ",", adicionar quantos desejar.
-            *		 @exemple 		= setaBlocos(['.topo', '.conceitual', ]);
-            */
-            function setaBlocos(blocosArray){
-            		if(blocosArray != false){
-            				jQuery.each(blocosArray , function(index, value){
-            						$(value.toString()).find('.content div:first').wrap('<div class="bloco-esq">').parent().next().wrap('<div class="bloco-dir">');
-            				});
-            		}
-            }
-
-            /*
-            *    Função @excluiBloco
-            *    @description = Exclui elementos e seu conteudo.
-            *    @blocosArray	= Elementos que serão excluidos.
-            *		 @obs: 				= O código do elemento também será removido.
-            *		 @exemple 		= excluiBloco(['.topo', '.conceitual', ]);
-            */
-            function excluiBloco(blocosArray){
-            		if(blocosArray != false){
-            				jQuery.each(blocosArray , function(index, value){
-            						$(value.toString()).remove();
-            				});
-            		}
-            }
-
-            /*
-            *    Função @maskValor
-            *    @description = Cria máscara de valor personalizada.
-            *    @input				= Elemento que receberá a máscara.
-            *    @moeda				= Símbolo da moeda.
-            *    @placeHold 	= Placeholde que atuará no elemento.
-            *    @separador  	= Símbolo para separar centenas e inteiros.
-            *		 @obs: 				= true => 1.00,00 ; false => 1,000.00
-            *		 @exemple 		= maskValor('.valor-entrada', '$', 'Valor da entrada:', true);
-            */
-            function maskValor(input, moeda, placeHold, separador){
-                $j = jQuery.noConflict();
-                var obj = ($j(input) === undefined ? $j(input) : $j(input));
-
-                obj.focus(function(event) {
-            			if(separador == true){
-            		    obj.priceFormat({
-            		                prefix: moeda,
-            		                centsSeparator: '.',
-            		                thousandsSeparator: ','
-            		    });
-            			}else{
-            				obj.priceFormat({
-            		                prefix: moeda,
-            		                centsSeparator: ',',
-            		                thousandsSeparator: '.'
-            		    });
-            			}
-                });
-
-                obj.blur(function(event) {
-
-                    if (obj.val() == (moeda + " 0,00")) {
-                        obj.val(placeHold);
-                    }
-                });
-            }
-
-            /*
-            *    Função @maps
-            *    @description = Cria mapas e seus links de acesso.
-            *    @mapsArray		= Iframe's dos mapas.
-            *		 @linkMap			= Classe do elemento que ao clicado exibirá o mapa.
-            *		 @obs: 				= Deixar os mapas em ordem dos links. É interessante colocar todos os mapas numa variavel e chamá-la na função.
-            *		 @exemple 		= maps([
-            												'<iframe>mapa1</iframe>',
-            												'<iframe>mapa2</iframe>'
-            										], '.verunidade');
-            */
-            function maps(mapsArray, linkMap){
-            		var mapPos = 1;
-            		jQuery.each(mapsArray , function(index, value){
-            				$('.bloco-mapas').append('<div class="map" rel="' + mapPos + '">' + value + '</div>');
-            				mapPos += 1;
-            		});
-
-            		var vermaisPos = 1;
-            		// define em que link clicar //
-            		$(linkMap).each(function () {
-            				$(this).wrap('<a href="#" rel="' + vermaisPos + '" class="mapLink">');
-            				vermaisPos += 1;
-            		});
-
-            		$('.mapLink').click(function (event) {
-            				event.preventDefault();
-            				var mapLinkPos = $(this).attr('rel');
-            				$('.map').hide().parent().find(".map[rel=" + mapLinkPos + "]").show();
-            		});
-            }
-
-            /*
-            *    Função @setFancybox
-            *    @description = Exibe imagens em fancyBox.
-            *    @classImgs		= Classe das imagens.
-            *    @altimgs			= Título que aparecerá abaixo da imagem.
-            *		 @exemple 		= setFancybox('.imgDetalhe', $('.produto_modelo').first().text());
-            */
-            function setFancybox(classImgs, altImgs){
-            	$j = jQuery.noConflict();
-            	$(".fancybox").fancybox({
-            				width: 300,
-            				height: 300
-            		});
-
-            	$j(classImgs).each(function(){
-            				var ulrImg = $(this).attr('src');
-            				$j(this).wrap('<a href="' + ulrImg + '" class="fancybox" rel="group" alt="' + altImgs.toString() +'" title="' + altImgs.toString() +'">');
-            		});
-            }
-
-
-            /*
-            *    Função @hover
-            *    @description = Hover nos produtos.
-            *    @classe		  = Classe dos produtos.
-            *		 @exemple 		= hover('.produto');
-            */
-            function hover(classe){
-            	$(classe).hover(function(){
-            		$(this).stop().fadeTo( 300 , 0.6)
-            	}, function(){
-            		$(this).stop().fadeTo( 300 , 1)
-            	});
-            }
-
-            /*
-            *    Função @nomeCamposForm
-            *    @description = Deixar o valor do atributo "name" fora do campo.
-            *    @campos		  = Classe dos inputs desejados.
-            *		 @exemple 		= nomeCamposForm('input');
-            */
-            function nomeCamposForm(campos){
-            	jQuery.each(campos , function(index, value){
-            		$(value.toString()).each(function(){
-            			var name = $(this).attr('name');
-            			var type = $(this).attr('type');
-
-            			if(type == 'hidden'){
-
-            			}else if(type == 'submit'){
-
-            			}else{
-            			$(this).before('<p class="nomeCampoForm">'+name+'</p>');
-            		}
-            		});
-            	});
-            }
-
-            /*
-            *    Função @topoFix
-            *    @description = Menu fixo no topo da mobile.
-            *    @classFix		= Classe do elemento que ficará fixo.
-            *		 @exemple 		= topoFix('.menuFixo');
-            */
-            function topoFix(classFix){
-            		var nav = $(classFix);
-            		$(classFix).css('display', 'none');
-
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 136) {
-                        nav.addClass("f-nav");
-                    } else {
-                        nav.removeClass("f-nav");
-                    }
-                });
-            }
-
-            /*
-            *    Função @colunas
-            *    @description = Torna os elementos em colunas.
-            *    @element		  = Classe do elemento que ficará em colunas.
-            *		 @qntColunas  = Quantidade de colunas desejada.
-            *		 @exemple 		= colunas('.produto', 4);
-            */
-            function colunas(element, qntColunas){
-            	$( element ).addClass( 'su-column su-column-size-1-' + qntColunas ).parent().addClass( "su-column su-column-size-1-1" ).wrap( '<div class="su-row" >');
-            }
-
-            /*
-            *    Função @sliceString
-            *    @description = Substitui texto usando idenficador como referência.
-            *    @element 		= Elemento que contém o texto a ser modificado.
-            *    @ident 			= Identificador para "cortar o texto"
-            *    @posic 			= (true, false)   true = retorna texto após o identificador
-            *                            				false = retorna texto antes do identificador
-            *		 @exemple 		= sliceString('select[name=entrada] option', '&', false);
-            */
-            function sliceString(element, ident, posic){
-            	$(element).each(function () {
-            		str_val = $(this).text();
-            		str_pos = str_val.indexOf(ident);
-
-            		if (str_pos !== -1) {
-            			if(posic == true){
-            				str_view = str_val.slice(str_pos + 2);
-            			}else{
-            				str_view = str_val.slice(0 , str_pos);
-            			}
-            			$(this).text(str_view);
-            		}
-            	});
-            }
-
-            /*
-            *    Função @font
-            *    @description  = Define font padrão pra LP.
-            *    @fontFamily	 = Como será chamada no css.
-            *    @urlGoogle 	 = Link do google fonts.
-            *    @obs 				 = Inserir apenas o valor do href na urlGoogle. Não esquecer de estilizar a font no css dos elementos.
-            *		 @exemple 		 = font('Lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700');
-            */
-            function font(fontFamily, urlGoogle){
-            	$('body').prepend('<style>*{font-family: ' + fontFamily + ' !important; }</style>');
-            	$('head').append("<link href='" + urlGoogle + "' rel='stylesheet' type='text/css'>");
-            }
-            </script>
-
-            <script>
-
-            		$(document).ready(function () {
-            				var resolucao = parseInt($(document).width());
-            				var produto = $('#bloco_detalhe .produto_nome').text();
-
-                    // ADICIONA MAPAS //
-                    var mapsArray = [
-                        // adiciona mapas com link do google //
-            						// '<iframe>Link mapa1</iframe>', '<iframe>Link mapa2</iframe>', ...
-                    ]
-
-            				if (resolucao > 1023) {
-
-            						// DESKTOP //
-            						widthContent('70%');
-
-            						// NOME CAMPOS FORA DO PLACEHOLD //
-            						//nomeCamposForm(['input', 'form select', 'form textarea']);
-
-            						$('#aba_content').appendTo('.conceitual .content');
-                        // FANCYBOX NAS IMAGENS //
-            						setFancybox('.imgDetalhe', produto);
-
-            						// MAPAS //
-                        maps(mapsArray, '.unidades-rodape .unidade');
-
-            						// EXCLUI BLOCOS INTEIROS //
-            						excluiBloco(['.TabControl']);
-
-            						// ADICIONA BLOCOS ESQ E DIR //
-            						//setaBlocos(['.bloco1', '.bloco2', ...]);
-
-                        // ADICIONA COLUNA //
-            						colunas('.produto', 4);
-            						colunas('.unidade', 3);
-            						colunas('.imgDetalhe', 4);
-            						//colunas('.map', 1);
-
-            						$('.rodape .content').prepend('<h3>Unidades</h3>');
-            				} else if (resolucao > 767) {
-
-            						// TABLET //
-            						widthContent('90%');
-
-                        // TOPO FIXO EM SCROLL DA MOBILE //
-            						topoFix('.nav-container');
-
-            						// EXCLUI BLOCOS INTEIROS //
-            						excluiBloco(['.TabControl']);
-
-            						// ADICIONA BLOCOS ESQ E DIR //
-            						//setaBlocos(['.bloco1', '.bloco2', ...]);
-
-            						// MAPAS //
-                        maps(mapsArray, '.unidades-rodape .unidade');
-
-                        $('#aba_content').appendTo('.conceitual .content');
-                        // FANCYBOX NAS IMAGENS //
-            						setFancybox('.imgDetalhe', produto);
-
-            						// ADICIONA COLUNA //
-            						colunas('.produto', 3);
-            						colunas('.unidade', 3);
-            						colunas('.imgDetalhe', 4);
-            						//colunas('.map', 1);
-
-                        $('.rodape .content').prepend('<h3>Unidades</h3>');
-
-                    } else {
-
-            						// MOBILE //
-            						widthContent('98%');
-
-            						// TOPO FIXO EM SCROLL DA MOBILE //
-            						topoFix('.nav-container');
-
-            						// MAPAS //
-                        maps(mapsArray, '.unidades-rodape .unidade');
-
-            						// ADICIONA COLUNA //
-            						colunas('.produto', 1);
-            						//colunas('.unidade', 1);
-            						//colunas('.map', 1);
-
-            						// ABAS //
-            						$("#aba_content img:nth-child(1)").show();
-            						$(".abas li:first div").addClass("selected");
-            						$(".aba").click(function(){
-            							$(".aba").removeClass("selected");
-            							$(this).addClass("selected");
-            							var indice = $(this).parent().index();
-            							indice++;
-            							$("#aba_content img").hide();
-            							$("#aba_content img:nth-child("+indice+")").show();
-            						});
-
-            						$(".aba").hover(
-            							function(){$(this).addClass("ativa")},
-            							function(){$(this).removeClass("ativa")}
-            						);
-
-            						// MODAL SEM QUBRA NA MOBILE //
-            						$('.reveal-modal').css('display', 'none');
-            						$('#rodape_politica').click(function(){
-            							$('.reveal-modal').show();
-            						});
-            						$('.close-reveal-modal').click(function(){
-            							$('.reveal-modal').hide();
-            						});
-            				}
-
-            				// PRIMEIRO OPTION DE CADA SELECT DESATIVADO //
-            				$('form select option:first-child').attr('disabled', 'disabled');
-
-            				// RETIRA UNIDADES INVALIDAS //
-            				$('.unidade .unidade_endereco').each(function(){
-            						if($(this).text() == 'Av'){
-            							$(this).parent().remove();
-            						}
-            				});
-
-            				// TROCAR TITULOS FORMULARIO //
-            				$('.form_titulo').click(function(){
-            					$('.form_titulo').removeClass('active');
-            					$(this).addClass('active');
-            				});
-
-            				// CARREGAR FORM DE COTACAO POR PADRÃO //
-            				$('#btn-COTACAO_LP').click();
-            				$(".div_form").hide();
-            				$("#div_form_1").fadeIn();
-
-            				// VALOR DO SUBMIT //
-            				$('input.submit').attr('value','Enviar');
-
-            				// HOVER NOS PRODUTOS //
-            				hover('.produto');
-
-                    // MASCARA PERSONALIZADA //
-                    maskValor('input[name=entrada]', '$ ', '$ Mensualidad:');
-
-            				font('Lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700');
-            		});
-
-
-            </script>
-
             <style>
             /*** CONFIGURAÇÃO GERAL ***/
             html, body, div, span, applet, object, iframe,
@@ -401,74 +12,74 @@
             dl, dt, dd, ol, ul, li,
             fieldset, form, label, legend,
             table, caption, tbody, tfoot, thead, tr, th, td {
-            	margin: 0;
-            	padding: 0;
-            	border: 0;
-            	outline: 0;
-            	font-weight: inherit;
-            	font-style: inherit;
-            	font-size: 100%;
-            	font-family: inherit;
-            	vertical-align: baseline;
+              margin: 0;
+              padding: 0;
+              border: 0;
+              outline: 0;
+              font-weight: inherit;
+              font-style: inherit;
+              font-size: 100%;
+              font-family: inherit;
+              vertical-align: baseline;
             }
 
             /* remember to define focus styles! */
             :focus {
-            	outline: 0;
+              outline: 0;
             }
 
             *{
-            	margin: 0;
-            	padding: 0;
-            	border: 0;
+              margin: 0;
+              padding: 0;
+              border: 0;
             }
 
             img{
-            	max-width: 100%;
+              max-width: 100%;
             }
 
             a{
-            	text-decoration: none;
-            	color: inherit;
+              text-decoration: none;
+              color: inherit;
             }
 
             ul, li{
-            	list-style: none;
+              list-style: none;
             }
 
             .map iframe{
-            		max-width: 100% !important;
+                max-width: 100% !important;
             }
             .map:not(:first-child){
-            		display: none;
+                display: none;
             }
 
             .left{
-            		float: left;
-            		left: 0;
+                float: left;
+                left: 0;
             }
 
             .right{
-            		float: right;
-            		right: 0;
+                float: right;
+                right: 0;
             }
 
             .radius5{
-            	-webkit-border-radius: 5px;
-            	-moz-border-radius: 5px;
-            	border-radius: 5px;
+              -webkit-border-radius: 5px;
+              -moz-border-radius: 5px;
+              border-radius: 5px;
             }
 
             .radius10{
-            	-webkit-border-radius: 10px;
-            	-moz-border-radius: 10px;
-            	border-radius: 10px;
+              -webkit-border-radius: 10px;
+              -moz-border-radius: 10px;
+              border-radius: 10px;
             }
 
             .clear-fix{
-            	overflow: auto;
-            	zoom: 1;
-            	clear: both;
+              overflow: auto;
+              zoom: 1;
+              clear: both;
             }
             /*** FIM CONFIGURAÇÃO GERAL ***/
 
@@ -480,62 +91,57 @@
             .logo-principal {
                 width: 100%;
                 text-align: center;
-                margin: 0 auto;
-            	background-color: #FFB800;
-                padding: 1% 0;
-                border-bottom: 3px solid #555;
+                margin: 0px auto;
+                padding: 2% 0px;
             }
 
             .logo-principal img {
-            	width: 20%;
-            	max-width: 250px;
+              max-width: 250px;
             }
 
             .chamada_leadfone {
-            	width: 100%;
-            	text-align: center;
+              width: 100%;
+              text-align: center;
             }
 
             .num_leadfone{
-            	display: none;
+              display: none;
             }
 
             .select_leadfones {
-            	padding: 5px;
-            	margin-top: 12px;
-            	background: #fff;
-            	border: 1px solid #777;
-            	font-size: 1em;
+              padding: 5px;
+              margin-top: 12px;
+              background: #fff;
+              border: 1px solid #777;
+              font-size: 1em;
             }
 
             .botao_leadfones {
-            		padding:10px;
-            		margin: 0 auto;
-            		margin-top:6px;
-            		color: #FFF;
-            		background: #85B406;
-            		display: block;
-            		cursor: pointer;
+                padding:10px;
+                margin: 0 auto;
+                margin-top:6px;
+                color: #FFF;
+                background: #85B406;
+                display: block;
+                cursor: pointer;
             }
 
             .botao_leadfones:hover {
-            	background: #65F91D;
+              background: #65F91D;
             }
 
             .desc_leadfone {
-            	width: 70%;
-            	text-align: center;
-            	margin: 5% auto 1%;
-            	font-size: 1.3em;
+              width: 70%;
+              text-align: center;
+              margin: 5% auto 1%;
+              font-size: 1.3em;
             }
 
             /** Topo Mobile **/
             .nav-container {
-                background: #FFB700;
-                border-bottom: 3px solid;
-            	display: none;
+              display: none;
             }
-                .f-nav{ z-index: 9999; position: fixed; left: 0; top: 0; width: 100%; display: block;}
+                .f-nav{ z-index: 9999; position: fixed; left: 0; top: 0; width: 100%; display: block !important;}
 
             .nav {
                 padding: 1%;
@@ -549,43 +155,49 @@
 
             .nav-container .logo_interna {
                 float: left;
+                width: 40%;
+                max-width: 250px;
+                margin: 2%;
             }
 
             .nav-container .chamada_leadfone{
-            	float: right !important;
+              float: right !important;
                 text-align: right !important;
-                width: 80% !important;
+                width: 50% !important;
                 margin-right: 1%;
             }
 
             .nav-container .select_leadfones{
-            	padding: 3px;
-            	font-size: 0.8em;
-            	margin-top: 0px;
+              padding: 3px;
+              font-size: 0.8em;
+              margin-top: 0px;
+              float: right;
             }
 
             .nav-container .botao_leadfones{
-            	float: right;
+              float: right;
                 padding: 1% 4%;
                 opacity: 1;
-                margin-bottom: 1%;
+                margin-bottom: 3%;
                 margin-right: 1%;
+                clear: right;
             }
             /*** FIM TOPO ***/
 
             /*** CONCEITUAL ***/
             .conceitual {
-            	margin: 5% auto;
+              margin: 5% auto;
             }
 
             #bloco_detalhe{
-            	text-align: center;
+              text-align: center;
+              position: relative;
             }
 
             #bloco_detalhe .produto_modelo {
-            	font-weight: bold;
-            	font-size: 2em;
-            	margin: 1% 3%;
+                font-weight: bold;
+                font-size: 2em;
+                margin: 1% 3%;
             }
 
             #bloco_detalhe .produto_nome {
@@ -600,21 +212,36 @@
             }
 
             #bloco_detalhe .descricao {
-            	margin: 1% 3%;
-            	font-size: 1em;
+                margin: 1% 3%;
+                font-size: 1em;
+            }
+
+            #bloco_detalhe .produto_foto {
+                opacity: 0.2;
+                position: absolute;
+                bottom: 0px;
+                width: 100%;
+                z-index: 999;
+                display: none;
+            }
+
+            #bloco_detalhe .produto_foto img {
+                max-width: 444px;
+                width: 100%;
             }
 
             #bloco_detalhe .imagem-especial {
-            	margin: 5% auto;
-            	text-align: center;
+              margin: 5% auto;
+              text-align: center;
             }
 
+
             .imagem-especial img{
-            	width: 100%;
+              width: 100%;
             }
 
             .ulMenu{
-            	display: none;
+              display: none;
             }
 
             /** ABAS **/
@@ -685,80 +312,61 @@
 
             /*** FORMULARIOS ***/
             .bloco-formulario {
-            	width: 80%;
-            	padding: 10%;
-            	background: rgba(238, 238, 238, 0.89);
+                width: 80%;
+                padding: 10%;
             }
 
             .linha-formulario {
-            	padding: 0px 10%;
-            	margin-bottom: 30px;
-            	background: #c4c4c4;
+              padding: 0px 10%;
+              margin-bottom: 30px;
+              background: #c4c4c4;
             }
 
             .form_titulo {
-            	width: 100%;
-            	min-height: 25px;
-            	background-size: 100% 100% !important;
-            	background-color: #444;
-            	color: #fff;
-            	text-align: center;
-            	padding: 17px 1px;
-            	margin: 5px 0 !important;
-            	font-size: 1.2em;
-            	font-weight: bold;
-            	cursor: pointer;
-            	-webkit-border-radius: 5px;
-            	-moz-border-radius: 5px;
-            	border-radius: 5px;
-            	text-transform: uppercase;
-            	float: none !important;
+                width: 100%;
+                min-height: 25px;
+                text-align: center;
+                padding: 17px 1px;
+                margin: 5px 0px !important;
+                font-weight: bold;
+                cursor: pointer;
+                border-radius: 5px;
+                float: none !important;
             }
 
             .form_titulo:hover {
-            	background-color: #777;
+              background-color: #777;
             }
 
             .div_form input, .div_form select, .div_form textarea {
-            	font-size: 14px;
-            	font-weight: 700;
-            	color: #000000;
-            	text-transform: uppercase;
-            	padding: 3%;
-            	margin-bottom: 7px;
-            	border: none;
-            	width: 94.5%;
-            	background: #FFF;
-            	display: table;
-            	-webkit-border-radius: 5px;
-            	-moz-border-radius: 5px;
-            	border-radius: 5px;
-            	text-transform: capitalize;
+              font-size: 14px;
+              font-weight: 700;
+              color: #000000;
+              padding: 3%;
+              margin-bottom: 7px;
+              border: none;
+              width: 94.5%;
+              background: #FFF;
+              display: table;
+              -webkit-border-radius: 5px;
+              -moz-border-radius: 5px;
+              border-radius: 5px;
             }
 
             .div_form select {
-            	width: 100.5% !important;
+              width: 100.5% !important;
             }
 
             input.submit {
-                width: 50%;
-                background: #FFB800 !important;
+                width: 75%;
                 margin: 5% auto;
-                font-size: 1.3em;
-                -webkit-border-radius: 10px;
                 padding: 3%;
-                -moz-border-radius: 10px;
                 border-radius: 10px;
-                color: #fff;
                 cursor: pointer;
             }
 
-            input.submit:hover {
-            	background: #F3F81E !important;
-            }
-
-            .formulario-container .logo-cliente-container, .logo-cliente{
-            	display: none;
+            .formulario-container .logo-cliente-container{
+              display: none;
             }
             /*** FIM FORMULARIOS ***/
 
@@ -768,77 +376,92 @@
             }
 
             .conteudo .content {
-            	padding: 10% 2%;
+                padding: 0px 2%;
             }
 
             .conteudo .produto_modelo {
-            	width: 95%;
-            	text-align: center;
-            	font-size: 1.2em;
-            	font-weight: bold;
-            	margin: 1%;
+              width: 95%;
+              text-align: center;
+              font-size: 1.2em;
+              font-weight: bold;
+              margin: 1%;
             }
 
             .unidade img{
-            	width:10% !important;
-            	margin-bottom: 2%;
-            	color: #666;
+              width:10% !important;
+              margin-bottom: 2%;
+              color: #666;
             }
 
             .unidade_titulo{
-            	font-size: 1.4em;
-            	font-weight: bold;
-            	margin-bottom: 1%;
+              font-size: 1.4em;
+              font-weight: bold;
+              margin-bottom: 1%;
             }
 
             .unidade_endereco{
-            	font-size: 1em;
+              font-size: 1em;
             }
 
             .imginfo {
-            	width: 50% !important;
+              width: 50% !important;
             }
 
             .bloco.conteudo .bloco-dir {
-            	width: 100%;
-            	margin: 0 auto;
-            	font-family: arial;
+              width: 100%;
+              margin: 0 auto;
+              font-family: arial;
             font-weight: normal;
             }
 
             .detalhes-container {
-            	margin: 0 0 10%;
-            	text-align: center;
+              margin: 0 0 10%;
+              text-align: center;
             }
 
             img.outros-modelos {
-            	margin: 0 4% 5%;
-            	float: left;
+              margin: 0 4% 5%;
+              float: left;
             }
 
             #imgDetalhes{
-            	text-align: center;
-            	clear: both;
+              text-align: center;
+              clear: both;
             }
 
             .imgDetalhe{
-            	margin: 1%;
+              margin: 1%;
             }
 
             h3 {
-            	font-size: 1.5em !important;
-            	margin: 0 0 5% !important;
+                font-size: 2em !important;
+                margin: 0px 0px 5% !important;
+                font-weight: bold;
+            }
+
+            #nome_categoria_Cuatricilos_Y_ATV{
+              color: #252525;
+              font-size: 1.25em;/* Aproximação devido à substituição de fonte */
+              font-weight: 900;
             }
             /*** FIM CONTEUDO ***/
 
             /*** RODAPE ***/
-            .rodape{
+            .rodape {
+                padding: 10% 2%;
+            }
 
+            .rodape h3{
+              color: #fff;
+            }
+
+            .rodape .logo-cliente{
+              text-align: center;
             }
 
             .produto{
-            		margin: 0 auto;
-            		text-align: center;
+                margin: 0 auto;
+                text-align: center;
             }
 
             div.bloco-produtos {
@@ -850,12 +473,16 @@
             }
 
             .produto .produto_nome{
-            	text-transform: uppercase;
+              text-transform: uppercase;
+            }
+
+            .unidade_titulo{
+              text-transform: uppercase;
             }
 
             div.unidade {
                 display: block;
-                background-color: rgb(255, 204, 77);
+                background-color: #fff;
                 border: 2px solid;
                 padding: 3% 0;
                 margin-bottom: 2px !important;
@@ -869,116 +496,127 @@
             }
             /*** FIM RODAPE ***/
 
+
             /*** MODIFICAÇÕES ***/
             @media all and (max-width: 767px){
-            		body{
-            			background-image: none !important;
-            		}
+                body{
+                  background-image: none !important;
+                }
             }
 
             @media all and (min-width: 768px){
-            	body {
-            		background-position: 0px 154px !important;
-            		background-size: 100% !important;
-            	}
-
-            	.bloco-esq{
-            			width: 65%;
-            			position: relative;
-            			float: left;
-            	}
-
-            	.bloco-dir{
-            			width: 35%;
-            			position: relative;
-            			float: right;
-            	}
-
-              .topo {
-                background: #FFB800;
+              body {
+                background-size: 100% !important;
               }
 
-            	.logo-principal{
-            		text-align: left;
+              .bloco-esq{
+                  width: 65%;
+                  position: relative;
+                  float: left;
+              }
+
+              .bloco-dir{
+                  width: 35%;
+                  position: relative;
+                  float: right;
+              }
+
+              .topo {
+                background: none;
+              }
+
+              .nav-container .logo_interna{
+                margin: 0px;
+              }
+
+
+              .logo-principal {
+                text-align: left;
                 background-color: inherit;
-                border-bottom: 0;
-            	}
+                border-bottom: 0px none;
+                padding-top: 0px;
+                float: left;
+                width: 50%;
+            }
 
-            	.logo-principal img{
-            		width: 10%;
-            	}
+              .chamada_leadfone {
+                text-align: right;
+              }
 
-            	.chamada_leadfone {
-            		text-align: right;
-            	}
+              .desc_leadfone {
+                width: 70%;
+                text-align: left;
+                margin: 4% 0 1%;
+              }
 
-            	.desc_leadfone {
-            		width: 70%;
-            		text-align: left;
-            		margin: 4% 0 1%;
-            	}
-
-            	.select_leadfones{
-            		margin: 3px 0;
+              .select_leadfones{
+                margin: 3px 0;
                 font-size: 0.9em;
-                width: auto;
-            	}
-
-            	.botao_leadfones{
-                margin-bottom: 3%;
                 float: right;
-            	}
+                width: auto;
+              }
 
-            	.conceitual {
-            		margin: 0% auto;
-            	}
+              .botao_leadfones{
+                margin-bottom: 1%;
+                float: right;
+                clear: right;
+                padding: 2px 10px;
+              }
+
+              .conceitual {
+                margin: 0% auto;
+              }
 
               .detalhes-container {
-            		margin: 0px;
-            	}
+                margin: 0px;
+              }
 
-            	.imagem-especial{
-            			display: none;
-            	}
+              #bloco_detalhe .produto_foto {
+                  opacity: 1;
+                  position: relative;
+                  display: block;
+              }
 
-            	.conceitu .bloco-esq{
-            		display: table;
-            	}
+              .imagem-especial{
+                  display: none;
+              }
 
-            	#bloco_detalhe {
-            		margin-top: 90%;
+              .conceitu .bloco-esq{
+                display: table;
+              }
+
+              #bloco_detalhe {
+                margin-top: 69%;
                 text-align: left;
-            	}
+              }
 
-            	.form_titulo{
-            		font-size: 1.1em;
-            		width: 91%;
-            		padding: 5%;
-            	}
+              .form_titulo{
+                font-size: 1.1em;
+                width: 91%;
+                padding: 5%;
+              }
 
-            	input.submit{
-            		width: 100%;
-            	}
+              input.submit{
+                width: 100%;
+              }
 
-            	.conteudo .content{
-            			padding: 5% 2%;
-            			position: relative;
-            	}
+              .conteudo .content{
+                  padding: 5% 2%;
+                  position: relative;
+              }
 
-            	.conteudo .content .bloco-dir{
-            		float: left;
-            		clear: left;
-            		width: 65%;
-            		margin-top: 4%;
-            	}
+              .conteudo .content .bloco-dir{
+                float: left;
+                clear: left;
+                width: 65%;
+                margin-top: 4%;
+              }
 
               .rodape {
-                background: #1c1c1c;
                 padding: 3% 1%;
               }
 
               .rodape h3 {
-                color: #fcb600;
                 font-weight: bold;
                 font-size: 2em !important;
                 font-style: italic;
@@ -991,11 +629,11 @@
                 color: #fff;
               }
 
-            	.unidades-rodape{
-            		right: 0;
-            		top: 0;
-            		margin: 0 !important;
-            	}
+              .unidades-rodape{
+                right: 0;
+                top: 0;
+                margin: 0 !important;
+              }
 
               .unidade img {
                 width: auto !important;
@@ -1006,55 +644,39 @@
                 font-size: 0.9em;
               }
 
-            	.bloco-produtos .outros-modelos {
-            		margin: 3% auto;
-            		width: 80% !important;
-            	}
+              .bloco-produtos .outros-modelos {
+                margin: 3% auto;
+                width: 80% !important;
+              }
             }
 
             @media all and (min-width: 1024px){
-            	body {
-            		background-position: 0px 75px !important;
-            		background-size: 100% !important;
-            		background-color: #f4f4f4;
-            	}
+              body {
+                background-size: 100% !important;
+              }
 
-            	.bloco-esq{
-            		width: 64%;
-            	}
+              .bloco-esq{
+                width: 68%;
+              }
 
-            	.bloco-dir{
-            		width: 34.3%;
-            	}
+              .bloco-dir{
+                width: 30%;
+              }
 
-            	.topo {
-            	  background-color: #ffb800;
-            	  background-image: linear-gradient(to left, #ffffff 80%, transparent 1px);
-            	  padding: 0.8%;
-            	}
+              .desc_leadfone, #select_leadfones, .botao_leadfones{
+                display: none;
+              }
 
-            	.desc_leadfone{
-            		display: none;
-            	}
-
-            	.logo-principal img {
-            		width: auto;
-            		float: left;
-            	}
+              .logo-principal img {
+                width: auto;
+                float: left;
+              }
 
               .bloco-formulario {
                 padding: 25% 6% 2%;
-                background: #ffb800;
                 width: 88%;
                 position: relative;
-              }
-
-            	.num_leadfone{
-            		width: 87% !important;
-            	}
-
-              #bloco_detalhe {
-                margin-top: 100%;
+                min-height: 445px;
               }
 
               #bloco_detalhe .chamada_descricao {
@@ -1063,95 +685,56 @@
 
               #bloco_detalhe .produto_nome{
                 font-size: 3em;
-                color: #ffb800;
-              }
-            	.form_titulo {
-                text-align: left;
-                padding: 5%;
-                color: #fff;
-                position: absolute;
-                font-size: 0.9em !important;
-                font-size: 10px;
-                font-family: arial !important;
-                font-weight: bold;
-                background: #202020 !important;
-                left: 0;
-                top: 0 !important;
-                margin-top: 0 !important;
-                -webkit-border-radius: 0px;
-                -moz-border-radius: 0px;
-                border-radius: 0px;
-            	}
-
-              div#btn-FINANCIAMENTO_LP {
-                left: 39%;
-                width: 52%;
               }
 
-            	.form_titulo div span{
-            		font-size: 12px;
-            		font-weight: bold;
-            	}
+              .div_form input, .div_form select, .div_form textarea{
+                font-family: Lato;
+                font-size: 12px;
+                color: #292929;
+              }
 
               .active {
                 background: inherit !important;
+                color: #fff;
               }
 
+              input.submit {
+                background: #202020 !important;
+                padding: 4%;
+                color: #fff !important;
+              }
 
-            	input.submit {
-            	  background: #202020 !important;
-            	  font-size: 1em;
-            	  padding: 8%;
-            	}
+              .num_leadfone {
+                  width: 88%;
+                  display: block;
+                  margin: 0 auto;
+              }
 
-            	.bloco-formulario .left {
-            		background: rgba(208, 208, 208, 0.89) !important;
-            		margin-top: -0.2% !important;
-            		padding: 6% 0 5% 6%;
-            		-webkit-border-radius: 0px;
-            		-moz-border-radius: 0px;
-            		border-radius: 0px;
-            	}
+              .num_leadfone img {
+                  float: left;
+              }
 
-            	.bloco-formulario .right {
-            		background: rgba(189, 189, 189, 0.89) !important;
-            		margin-top: -0.2% !important;
-            		padding: 6% 0 5% 6%;
-            		-webkit-border-radius: 0px;
-            		-moz-border-radius: 0px;
-            		border-radius: 0px;
-            	}
+              .chamada_leadfone {
+                  text-align: center;
+                  padding: 8% 0px;
+                  padding-bottom: 10%;
+              }
 
-            	.num_leadfone {
-            		width: 30%;
-            		float: right;
-            		color: #666;
-            		margin-right: 5%;
-            		display: block;
-            		margin-top: 12px;
-            	}
+              .chamada_leadfone p {
+                  font-size: 0.8em;
+                  text-transform: uppercase;
+                  padding-top: 3%;
+              }
 
-            	.chamada_leadfone p {
-            	  line-height: 1.5em;
-            	  clear: left;
-            	  font-size: 1em;
-            	  text-transform: uppercase;
-            	}
+              .chamada_leadfone span {
+                font-weight: bold;
+                margin-left: 1%;
+              }
 
-            	.chamada_leadfone span {
-            		clear: right;
-            		font-size: 0.7em;
-            		font-weight: bold;
-            	}
-
-            	.conteudo {
-            		background: #fff;
-            	}
-
-            	#bloco_detalhe .produto_modelo{
-            		font-size: 1.5em;
-            		margin: 1% 0;
-            	}
+              #bloco_detalhe .produto_modelo{
+                font-size: 1.5em;
+                margin: 1% 0;
+              }
 
               #bloco_detalhe .descricao {
                 margin: 1% 0;
@@ -1160,107 +743,140 @@
                 text-align: justify;
               }
 
-            	#imgDetalhes{
-            		text-align: left;
-            	}
+              #imgDetalhes{
+                text-align: left;
+              }
 
-            	div#imgDetalhes a:nth-child(2) img {
-            		margin: 1% 5.7%;
-            	}
+              .produto_foto {
+                  float: left;
+                  width: 35%;
+                  margin-bottom: 4%;
+              }
 
-            	img.outros-modelos {
-            		margin: 0 0 5%;
-            		float: left;
-            	}
+              .conteudo .produto_modelo.principal{
+                  font-size: 4em;
+                  margin-left: 0;
+                  text-align: left;
+              }
 
-            	.conteudo .content {
-            		padding: 3% 2% 0;
-            	}
+              .conteudo .descricao {
+                  width: 60%;
+                  float: left;
+                  font-weight: normal;
+                  font-size: 0.8em;
+                  margin-bottom: 5%;
+              }
 
-            	form .nomeCampoForm {
-            		margin: 6% 0 2%;
-            		font-size: 12px;
-            		text-transform: uppercase;
-            	}
+              div#imgDetalhes a:nth-child(2) img {
+                margin: 1% 5.7%;
+              }
+
+              img.outros-modelos {
+                margin: 0 0 5%;
+                float: left;
+              }
+
+              .conteudo .content {
+                padding: 3% 2% 0;
+              }
+
+              form .nomeCampoForm {
+                margin: 6% 0 2%;
+                font-size: 12px;
+                text-transform: uppercase;
+              }
 
               .conteudo h3{
-            	  color: #ffb800;
-            	  text-transform: uppercase;
-            	  font-size: 2em !important;
-            	  font-weight: bold;
-            	  font-style: italic;
-            	  color: #ffb800;
-            	}
+                text-transform: uppercase;
+                font-size: 2em !important;
+                font-weight: bold;
+                font-style: italic;
+              }
 
-            	.formulario-container .logo-cliente-container{
-            		display: block;
-            		margin-top: 20%;
-            		position: absolute;
-            		margin-left: 10%;
-            	}
+              .formulario-container .logo-cliente-container{
+                display: block;
+                margin-top: 20%;
+                position: absolute;
+                margin-left: 10%;
+              }
 
-            	.unidade {
-            		text-align: left !important;
-            	}
+              .unidade {
+                text-align: left !important;
+                width: 33% !important;
+              }
 
-            	.unidade img {
-            		margin-bottom: 10%;
-            	}
+              .unidade img {
+                margin-bottom: 10%;
+              }
 
-            	.unidade_titulo{
-            		font-size: 1em;
-            	}
+              .unidade_titulo {
+                  font-family: Lato;
+                  color: #FFF;
+                  font-size: 14px;
+                  font-weight: 900;
+                  line-height: 18px;
+                  text-align: left;
+              }
 
-            	.unidade_endereco {
-            		font-family: arial;
-            		font-size: 0.9em;
-            		color: #c8c8c8;
-            		text-align: left;
-            		margin-bottom: 10%;
-            		line-height: 1.5em;
-            	}
+              .unidade_endereco {
+                font-family: Lato;
+                color:  #ffffff;
+                font-size: 14px;
+                font-weight: 300;
+                line-height: 18px;
+                text-align: left;
+              }
 
-            	.div_form textarea {
-            		min-height: 100px;
-            	}
+              .div_form textarea {
+                min-height: 73px;
+              }
 
-            	.conteudo .produto_modelo {
-            		width: 50%;
-            		font-size: 0.8em;
-            		font-weight: normal;
-            		float: left;
-            	}
+              .conteudo .produto_modelo {
+                width: 50%;
+                font-size: 0.8em;
+                font-weight: normal;
+                float: left;
+              }
+
+              .dream_logo {
+                width: 23%;
+              }
+
+                .produtos_categoria .produto_modelo{
+                    width: 100%;
+                    text-align: center;
+                }
             }
 
 
             /*** COLUNAS ***/
             .su-row {
-            	clear: both;
-            	zoom: 1;
-            	margin-bottom: 1.5em;
+              clear: both;
+              zoom: 1;
+              margin-bottom: 1.5em;
             }
             .su-row:before,
             .su-row:after {
-            	display: table;
-            	content: "";
+              display: table;
+              content: "";
             }
             .su-row:after { clear: both; }
             .su-column {
-            	display: block;
-            	margin: 0 4% 0 0;
-            	float: left;
-            	-webkit-box-sizing: border-box;
-            	-moz-box-sizing: border-box;
-            	box-sizing: border-box;
+              display: block;
+              margin: 0 4% 0 0;
+              float: left;
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              box-sizing: border-box;
             }
             .su-column-last { margin-right: 0; }
             .su-row .su-column { margin: 0 0 0 4%; }
             .su-row .su-column.su-column-size-1-1 { margin-left: 0; margin-right: 0; }
             .su-row .su-column:first-child { margin-left: 0; }
             .su-column-centered {
-            	margin-right: auto !important;
-            	margin-left: auto !important;
-            	float: none !important;
+              margin-right: auto !important;
+              margin-left: auto !important;
+              float: none !important;
             }
             .su-column img,
             .su-column iframe,
@@ -1302,97 +918,97 @@
             </style>
             <div class="nav-container">
             <div class="nav">
-            	<div class="topoFixo">
-            		<a href="{dominio}" >{logo}</a>
-            		<div>{leadfones}</div>
-            	</div>
+              <div class="topoFixo">
+                <a href="{dominio}" >{logo}</a>
+                <div>{leadfones}</div>
+              </div>
                 <div class="clear"></div>
             </div>
             </div>
             <div class="bloco topo">
-            		<div class="content">
-            				<div class="logo-principal">
-            						<a href="{dominio}" >{logo}</a>
-            				</div><!-- fim logo_principal -->
-            				<div>{leadfones}</div>
-            				<div class="clear-fix" ></div>
-            		</div><!-- fim content-->
-            		<div class="clear-fix" ></div>
+                <div class="content">
+                    <div class="logo-principal">
+                        <a href="{dominio}" >{logo}</a>
+                    </div><!-- fim logo_principal -->
+                    <div>{leadfones}</div>
+                    <div class="clear-fix" ></div>
+                </div><!-- fim content-->
+                <div class="clear-fix" ></div>
             </div><!-- fim topo-->
 
             <div class="bloco conceitual">
-            		<div class="content">
-            				<div id="bloco_detalhe">
-            						<div class="produto_nome">{produto_nome}</div>
-            						<div class="produto_modelo">{modelo}</div>
-            						<div class="chamada_descricao">{chamada}</div>
-            						<div class="descricao">{descricao}</div>
-            						<div class="produto_foto">{produto_foto}</div>
-            						<div class="imagem-especial">
-            								<img src="{produto_foto_especial}" id="foto-especial"/>
-            						</div>
-            						<div class="TabControl">
-            							<div id="header">
-            								<ul class="abas">
-            									<li> <div class="aba"> <span>Detalle 1</span> </div> </li>
-            									<li> <div class="aba"> <span>Detalle 2</span> </div> </li>
-            									<li> <div class="aba"> <span>Detalle 3</span> </div> </li>
-            									<li> <div class="aba"> <span>Detalle 4</span> </div> </li>
-            								</ul>
-            							</div>
-            							<div id="aba_content">
-            							</div>
-            						</div>
-            				</div><!-- fim bloco-detalhe-->
+                <div class="content">
+                    <div id="bloco_detalhe">
+                        <div class="imagem-especial">
+                            <img src="{produto_foto_especial}" id="foto-especial"/>
+                        </div>
+                        <div class="produto_foto">{produto_foto}</div>
+                        <div class="produto_nome">{produto_nome}</div>
+                        <div class="produto_modelo principal">{modelo}</div>
+                        <div class="chamada_descricao">{chamada}</div>
+                        <div class="descricao">{descricao}</div>
 
-            				<div class="formulario-container">
-            						<div class="bloco-formulario">
-            								{forms}
-            						</div><!-- fim bloco-formulario-->
+                        <div class="TabControl">
+                          <div id="header">
+                            <ul class="abas">
+                              <li> <div class="aba"> <span>Detalle 1</span> </div> </li>
+                              <li> <div class="aba"> <span>Detalle 2</span> </div> </li>
+                              <li> <div class="aba"> <span>Detalle 3</span> </div> </li>
+                              <li> <div class="aba"> <span>Detalle 4</span> </div> </li>
+                            </ul>
+                          </div>
+                          <div id="aba_content">
+                          </div>
+                        </div>
+                    </div><!-- fim bloco-detalhe-->
 
-            						<div class="logo-cliente-container">
-            								<div class="logo-cliente">
-            										{logo2}
-            								</div>
-            								<div class="unidades">
-            										{unidades}
-            								</div>
-            						</div>
-            				</div>
-            				<div class="clear-fix" ></div>
-            		</div><!-- fim content-->
-            		<div class="clear-fix" ></div>
+                    <div class="formulario-container">
+                        <div class="bloco-formulario">
+                            {forms}
+                        </div><!-- fim bloco-formulario-->
+
+                        <div class="logo-cliente-container">
+                            <div class="logo-cliente">
+                                {logo2}
+                            </div>
+                            <div class="unidades">
+                                {unidades}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear-fix" ></div>
+                </div><!-- fim content-->
+                <div class="clear-fix" ></div>
             </div>
             </div><!-- fim  conceitual-->
 
             <div class="bloco conteudo">
             <div class="content">
-            		<div class="detalhes-container">
-            				<div id="imgDetalhes">
+                <div class="detalhes-container">
+                    <div id="imgDetalhes">
 
-            				</div>
-            		</div>
-            		<h3>Modelos</h3>
-            		<div class="bloco-produtos">
-            			{produtos}
-            		</div>
-            		<div class="clear-fix" ></div>
+                    </div>
+                </div>
+                <h3>/ Modelos</h3>
+                <div class="bloco-produtos">
+                  {produtos}
+                </div>
+                <div class="clear-fix" ></div>
             </div><!-- fim content -->
             <div class="clear-fix" ></div>
             </div><!-- fim conteudo -->
 
-
             <div class="bloco rodape">
             <div class="content">
-            		<div class="unidades-rodape">
-            				{unidades}
-            		</div>
-            		<div class="bloco-mapas">
+                <div class="unidades-rodape">
+                    {unidades}
+                </div>
+                <div class="bloco-mapas">
 
-            		</div>
-            		<div class="clear-fix" ></div>
+                </div>
+                <div class="logo-cliente">{logo2}</div>
+                <div class="clear-fix" ></div>
             </div><!-- fim content -->
-            <div class="clear-fix" ><div>
+            <div class="clear-fix" ></div>
             </div><!-- fim rodape -->
-
         """

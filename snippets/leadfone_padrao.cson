@@ -1,0 +1,66 @@
+'*':
+    'template_novo':
+        'prefix': 'lp_leadfone'
+        'body': """
+            <!-- MODELO DE LEADFONE -->
+<style>
+  .num_leadfone{
+
+  }
+
+  .num_leadfone img{
+
+  }
+
+  .titulo_leadfone{
+
+  }
+
+  .bloco_leadfone{
+    display: none;
+  }
+
+  .select_leadfones{
+
+  }
+
+  .botao_leadfones{
+
+  }
+
+  @media all and (min-width: 767px){
+
+  }
+
+  @media all and (min-width: 1024px){
+    .bloco_leadfone{
+      display: block;
+    }
+
+    .select_leadfones, .botao_leadfones{
+      display: none;
+    }
+  }
+</style>
+
+<div class="num_leadfone">
+    <div class="titulo_leadfone">
+      	<!-- <img src="upload/1c4cc3d8.png" /> -->
+    	Digite aqui um titulo!
+  	</div>
+
+  	<div class="bloco_leadfone">
+    	<p>(xx) xxxx-xxxx</p>
+  	</div>
+  	<div class="clear-fix" ></div>
+
+</div>
+<div class="clear-fix" ></div>
+
+<select class="select_leadfones radius5" id="select_leadfones" onchange="window.location.replace('tel:+'+$(this).val())">
+	<option value="xxxxxxxxxx">Vendas - (xx) xxxx-xxxx</option>
+</select>
+
+<input class="botao_leadfones radius5" type="button" value="LIGUE AGORA" onclick="window.location.replace('tel:+'+$('#select_leadfones').val())">
+<!-- FIM LEADFONE -->
+        """
