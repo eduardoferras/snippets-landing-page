@@ -1,7 +1,7 @@
 {
   "name": "snippets-landing-page",
   "main": "./lib/snippets-landing-page",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Landing Page Snippets Atom",
   "repository": {
     "type": "git",
