@@ -43,7 +43,7 @@ Documentação snippets landing pages
 |      lmaskmexico    | Máscara para valores do méxico        |
 |      lca     	      | Template para carrossel               |
 |      lp_new         | Template Novo                         |
-|      lp_css         | JS Padrão                             |
+|      lp_css         | CSS Padrão                             |
 |      lp_js          | JS Padrão                             |
 |      lp_leadfone    | Leadfone Padrão                       |
 
@@ -55,3 +55,7 @@ Documentação snippets landing pages
 5. Colabore com um pull request.
 
 A todos os snippets optou-se utilizar a letra L ao início do comando para diferenciar o grupo dos demais atalhos.
+
+## Licença
+
+[MIT Licença](http://edferras.mit-license.org/)
