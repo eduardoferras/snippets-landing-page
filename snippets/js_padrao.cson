@@ -1,0 +1,180 @@
+'*':
+    'template_novo':
+        'prefix': 'lp_js'
+        'body': """
+            <!-- MODELO JS -->
+<script type="text/javascript" src="upload/func_modeloLP.js"></script>
+<script>
+	$(document).ready(function () {
+          var resolucao = parseInt($(document).width());
+          var produto = $('#bloco_detalhe .produto_nome').text();
+
+          // ADICIONA MAPAS //
+          var mapsArray = [
+              // adiciona mapas com link do google //
+              '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6908.611850076305!2d-51.162839!3d-30.02808!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951977975e9193cd%3A0x491a9d37ddb150a1!2sAv.+Nilo+Pe%C3%A7anha%2C+2825+-+Petr%C3%B3polis%2C+Porto+Alegre+-+RS%2C+90470-001%2C+Brasil!5e0!3m2!1spt-BR!2sus!4v1440467726164" width="980" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>'
+          ]
+
+          if (resolucao > 1023) {
+              // DESKTOP //
+
+              widthContent('70%');
+
+              // NOME CAMPOS FORA DO PLACEHOLD //
+              //nomeCamposForm(['input', 'form select', 'form textarea']);
+
+              $('#aba_content').appendTo('.conceitual .content');
+              // FANCYBOX NAS IMAGENS //
+              setFancybox('.imgDetalhe', produto);
+
+              // MAPAS //
+              colunas('.unidade', 3);
+              maps(mapsArray, '.unidades-rodape .unidade', false);
+
+              // EXCLUI BLOCOS INTEIROS //
+              excluiBloco(['.TabControl', '.logo-cliente-container']);
+
+              // ADICIONA BLOCOS ESQ E DIR //
+              setaBlocos(['.topo','.conceitual']);
+
+              // ADICIONA COLUNA //
+              colunas('.produto', 6);
+              colunas('.imgDetalhe', 4);
+              //colunas('.map', 1);
+
+            // ESCOLHER TIPO DE FORMULARIO //
+            formType('abas', 2);
+
+              $('.descTable').prependTo('.conteudo .content');
+              $('.conceitual .descricao').prependTo('.conteudo .content');
+              $('.conceitual .produto_modelo').prependTo('.conteudo .content');
+              $('.conceitual .produto_foto').prependTo('.conteudo .content');
+
+          } else if (resolucao > 767) {
+              // TABLET //
+
+              widthContent('90%');
+
+              // TOPO FIXO EM SCROLL DA MOBILE //
+              topoFix('.nav-container');
+
+              // EXCLUI BLOCOS INTEIROS //
+              excluiBloco(['.TabControl','.logo-cliente-container']);
+
+              // ADICIONA BLOCOS ESQ E DIR //
+              setaBlocos(['.topo','.conceitual']);
+
+              // MAPAS //
+              colunas('.unidade', 2);
+              maps(mapsArray, '.unidades-rodape .unidade', false);
+
+              $('#aba_content').appendTo('.conceitual .content');
+              // FANCYBOX NAS IMAGENS //
+              setFancybox('.imgDetalhe', produto);
+
+              // ADICIONA COLUNA //
+              colunas('.produto', 6);
+
+              colunas('.imgDetalhe', 4);
+              //colunas('.map', 1);
+
+              $('.descTable').appendTo('.detalhes-container');
+          } else {
+              // MOBILE //
+
+            widthContent('96%');
+
+              // TOPO FIXO EM SCROLL DA MOBILE //
+              topoFix('.nav-container');
+
+              // EXCLUI BLOCOS INTEIROS //
+              excluiBloco(['.TabControl']);
+
+              // MAPAS //
+              maps(mapsArray, '.unidades-rodape .unidade', true);
+
+              // ADICIONA COLUNA //
+              colunas('.produto', 2);
+              //colunas('.unidade', 1);
+              //colunas('.map', 1);
+
+              // ABAS //
+              $("#aba_content img:nth-child(1)").show();
+              $(".abas li:first div").addClass("selected");
+              $(".aba").click(function(){
+                $(".aba").removeClass("selected");
+                $(this).addClass("selected");
+                var indice = $(this).parent().index();
+                indice++;
+                $("#aba_content img").hide();
+                $("#aba_content img:nth-child("+indice+")").show();
+              });
+
+              $(".aba").hover(
+                function(){$(this).addClass("ativa")},
+                function(){$(this).removeClass("ativa")}
+              );
+
+              // MODAL SEM QUBRA NA MOBILE //
+              $('#rodape_politica').css('left', '0px')
+              $('.reveal-modal').css('display', 'none');
+              $('#rodape_politica').click(function(){
+                $('.reveal-modal').show();
+              });
+              $('.close-reveal-modal').click(function(){
+                $('.reveal-modal').hide();
+              });
+
+              $('.descTable').appendTo('#bloco_detalhe');
+              $('.descLinha .descCell:first-child').click(function(){
+                $(this).next().slideToggle();
+              });
+          }
+
+      		// TODOS //
+
+          // PRIMEIRO OPTION DE CADA SELECT DESATIVADO //
+          $('form select option:first-child').attr('disabled', 'disabled');
+
+          // RETIRA UNIDADES INVALIDAS //
+          $('.unidade .unidade_endereco').each(function(){
+              if($(this).text() == 'Av'){
+                $(this).parent().remove();
+              }
+          });
+
+          // TROCAR TITULOS FORMULARIO //
+          $('.form_titulo').click(function(){
+            $('.form_titulo').removeClass('active');
+            $(this).addClass('active');
+          });
+
+          // CARREGAR FORM DE COTACAO POR PADRÃO //
+          $('#btn-COTACAO_LP').click();
+          $(".div_form").hide();
+          $("#div_form_1").fadeIn();
+
+          // VALOR DO SUBMIT //
+          $('#button_1').attr('value' , 'SOLICITAR COTAÇÃO');
+          $('#button_2').attr('value' , 'SIMULAR FINANCIAMENTO');
+
+
+          // HOVER NOS PRODUTOS //
+          hover('.produto');
+
+          // MASCARA PERSONALIZADA //
+          maskValor('input[name=entrada]', '$ ', '$ Mensualidad:');
+
+          $('#nome_categoria_Motos').text('');
+          $('#nome_categoria_Cuatricilos_Y_ATV').text('Quadriciclos');
+          $('#nome_categoria_Motopel_Dream').html('<img src="upload/0f1cc62c.png" class="dream_logo"/>');
+          $('#produto_categoria_Motopel_Dream').prependTo('.dream .content');
+
+          $('.unidade').append('<img src="upload/76379822.png" />');
+
+          $('.rodape .content').prepend('<h3>/ ONDE ENCONTRAR</h3>');
+          font('Lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700');
+      });
+</script>
+<!-- FIM JS -->
+        """

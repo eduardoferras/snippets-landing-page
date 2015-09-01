@@ -1,0 +1,124 @@
+'*':
+    'template_novo':
+        'prefix': 'lp_css'
+        'body': """
+            <!-- MODELO CSS -->
+<style>
+/* TODOS OS DISPOSITIVOS */
+  .topo {
+    display: none;
+  }
+
+  .logo-principal{
+    border-bottom: 3px solid #000;
+	background-color: #56B535;
+  }
+
+  .logo-principal img {
+    width: 18%;
+    max-width: 250px;
+  }
+
+  .topoFixo img {
+      width: 20%;
+      float: left;
+  }
+
+  .nav-container{
+    background: #56B535;
+    border-bottom: 3px solid;
+    display: block !important;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+  }
+
+  .nav-container .select_leadfones{
+    margin-top: 15px;
+  }
+
+  .imagem-especial img {
+    margin-top: 100px;
+  }
+
+  #bloco_detalhe .produto_modelo{
+    color: #008C23;
+  }
+
+  .bloco-formulario{
+    background: #008C23;
+  }
+
+  input.submit{
+    background: #234E2E;
+    color: #fff;
+    font-size: 1em;
+  }
+
+  .form_titulo {
+    background-color: #024212;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1em;
+  }
+
+  .rodape{
+    background: #024212;
+  }
+
+  @media all and (min-width: 767px){
+	/* TABLET */
+    .topoFixo img {
+      width: 10%;
+      float: left;
+  	}
+
+    .conceitual {
+    	margin: 140px auto 0;
+	}
+  }
+
+  @media all and (min-width: 1024px){
+	/* DESKTOP */
+    .nav-container{
+      display: none !important;
+    }
+
+    .topo{
+      display: block;
+    }
+
+    .logo-principal{
+      width: 100%;
+      background: none;
+      border: 0;
+    }
+
+    .logo-principal img{
+      width: 12%;
+    }
+
+    .conceitual{
+      margin: 0;
+    }
+
+    .form_titulo {
+      font-size: 12px;
+      margin-top: 5% !important;
+    }
+
+    .active {
+      background: inherit !important;
+      color: #FFF !important;
+    }
+  }
+
+  @media all and (min-width: 1300px){
+	/* ALTA RESOLUÇÂO */
+
+  }
+</style>
+<!-- FIM CSS -->
+        """

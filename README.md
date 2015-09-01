@@ -42,7 +42,10 @@ Documentação snippets landing pages
 |      lmodalcolorbox | Adicionar modal colorbox              |
 |      lmaskmexico    | Máscara para valores do méxico        |
 |      lca     	      | Template para carrossel               |
-|      ltp     	      | Template landing page                 |
+|      lp_new         | Template Novo                         |
+|      lp_css         | JS Padrão                             |
+|      lp_js          | JS Padrão                             |
+|      lp_leadfone    | Leadfone Padrão                       |
 
 ## Contribuir
 1. Fork o projeto.
